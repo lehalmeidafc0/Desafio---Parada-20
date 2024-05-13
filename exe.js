@@ -1,48 +1,32 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Média</title>
-</head>
-<body>
-    <h2>Calculadora de Média</h2>
-    <form id="formMedia">
-        <label for="nota1">Nota 1:</label>
-        <input type="number" id="nota1" name="nota1" required><br><br>
-        
-        <label for="nota2">Nota 2:</label>
-        <input type="number" id="nota2" name="nota2" required><br><br>
-        
-        <label for="nota3">Nota 3:</label>
-        <input type="number" id="nota3" name="nota3" required><br><br>
-        
-        <button type="button" onclick="calcularMedia()">Calcular Média</button>
-    </form>
+// Função para calcular a média
+function calcularMedia(n1, n2, n3) {
+    return (n1 + n2 + n3) / 3;
+}
 
-    <p id="resultado"></p>
+// Função para verificar se o aluno foi aprovado ou reprovado
+function verificarStatus(media) {
+    if (media >= 6) {
+        return "Aprovado";
+    } else {
+        return "Reprovado";
+    }
+}
 
-    <script>
-        function calcularMedia() {
-            // Obtendo os valores das notas
-            var nota1 = parseFloat(document.getElementById("nota1").value);
-            var nota2 = parseFloat(document.getElementById("nota2").value);
-            var nota3 = parseFloat(document.getElementById("nota3").value);
+// Função principal
+function calcularEStatusDasNotas(n1, n2, n3) {
+    const media = calcularMedia(n1, n2, n3);
+    const status = verificarStatus(media);
 
-            // Calculando a média
-            var media = (nota1 + nota2 + nota3) / 3;
+    // Retornar a média e o status
+    return {
+        media: media,
+        status: status
+    };
+}
 
-            // Verificando se o aluno foi aprovado ou reprovado
-            var resultado = "";
-            if (media >= 6) {
-                resultado = "Parabéns! Você foi aprovado com média " + media.toFixed(2);
-            } else {
-                resultado = "Você foi reprovado com média " + media.toFixed(2);
-            }
+// Exemplo de uso do programa
+const notas = [7, 8, 5]; // Substitua esses valores pelas notas do aluno
+const resultado = calcularEStatusDasNotas(...notas);
 
-            // Exibindo o resultado na página
-            document.getElementById("resultado").innerHTML = resultado;
-        }
-    </script>
-</body>
-</html>
+console.log("Média do aluno:", resultado.media);
+console.log("Status:", resultado.status);
